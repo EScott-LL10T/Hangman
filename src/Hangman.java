@@ -1,12 +1,13 @@
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Hangman {
-    public static void main(String[] args){
+    static void main(String[] args){
         hangman();
     }
 
-    public static void hangman(){
+    static void hangman(){
         String word = "pizza";
 
         Scanner s = new Scanner(System.in);
@@ -18,15 +19,87 @@ public class Hangman {
         s.close();
     }
 
-    public static void setWordState(ArrayList<Character> wordState, int wordLength){
+    static void setWordState(ArrayList<Character> wordState, int wordLength){
         for(int i = 0; i < wordLength; i++){
             wordState.add('_');
         }
     }
 
-    public static void welcomeMessage(){
+    static void welcomeMessage(){
         IO.println("************************");
         IO.println("Welcome to Java Hangman!");
         IO.println("************************");
+
+
+    }
+
+    static String getHangmanArt(int wrongGuesses){
+        return switch(wrongGuesses){
+            case 0 -> """
+                      
+                      
+                      
+                      """;
+            case 1 -> """
+                       o
+                      
+                      
+                      """;
+            case 2 -> """
+                       o
+                       |
+                      
+                      """;
+            case 3 -> """
+                       o
+                      /|
+                      
+                      """;
+            case 4 -> """
+                       o
+                      /|\\
+                      
+                      """;
+            case 5 -> """
+                       o
+                      /|\\
+                      /
+                      """;
+            case 6 -> """
+                       o
+                      /|\\
+                      / \\
+                      """;
+            default -> "";
+        };
+    }
+
+    static void printWordState(ArrayList<Character> wordState){
+        IO.print("Word: ");
+        for(char c: wordState){
+            IO.print(c + " ");
+        }
+        IO.println();
+    }
+
+
+    public static char guessLetter(Scanner s){
+        String input = "";
+        char c = '&';
+        while(input.length() != 1 && !Character.isLetter(c)){
+            IO.println("Guess a letter: ");
+            input = s.next();
+            if(input.length() == 1){
+                c = input.charAt(0);
+                if(!Character.isLetter(c)){
+                    IO.println("please enter a letter of the alphabet.");
+                }
+            }else{
+                IO.println("please enter one letter.");
+            }
+
+        }
+        return c;
+
     }
 }
