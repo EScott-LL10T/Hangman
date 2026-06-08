@@ -14,7 +14,27 @@ public class Hangman {
         ArrayList<Character> wordState = new ArrayList<>();
         setWordState(wordState, word.length());
         int wrongGuesses = 0;
+
         welcomeMessage();
+
+        while(wrongGuesses < 6){
+
+            IO.println(getHangmanArt(wrongGuesses));
+
+            printWordState(wordState);
+            char letter = guessLetter(s);
+            if(word.indexOf(letter) >= 0){
+                IO.println("correct!\n");
+                for(int i = 0; i < word.length(); i++){
+                    if(letter == word.charAt(i)){
+                        wordState.set(i, letter);
+                    }
+                }
+            }else{
+                IO.println("Wrong guess!\n");
+                wrongGuesses++;
+            }
+        }
 
         s.close();
     }
