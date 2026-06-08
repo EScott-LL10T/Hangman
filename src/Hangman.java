@@ -90,7 +90,7 @@ public class Hangman {
             IO.println("Guess a letter: ");
             input = s.next();
             if(input.length() == 1){
-                c = input.charAt(0);
+                c = input.toLowerCase().charAt(0);
                 if(!Character.isLetter(c)){
                     IO.println("please enter a letter of the alphabet.");
                 }
