@@ -13,8 +13,7 @@ public class Hangman {
         ArrayList<Character> wordState = new ArrayList<>();
         setWordState(wordState, word.length());
         int wrongGuesses = 0;
-
-        IO.println(wordState.toString());
+        welcomeMessage();
 
         s.close();
     }
@@ -23,5 +22,11 @@ public class Hangman {
         for(int i = 0; i < wordLength; i++){
             wordState.add('_');
         }
+    }
+
+    public static void welcomeMessage(){
+        IO.println("************************");
+        IO.println("Welcome to Java Hangman!");
+        IO.println("************************");
     }
 }
