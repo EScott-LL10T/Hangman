@@ -17,24 +17,39 @@ public class Hangman {
 
         welcomeMessage();
 
-        while(wrongGuesses < 6){
+        while(wrongGuesses < 6) {
 
             IO.println(getHangmanArt(wrongGuesses));
 
             printWordState(wordState);
             char letter = guessLetter(s);
-            if(word.indexOf(letter) >= 0){
+            if (word.indexOf(letter) >= 0) {
                 IO.println("correct!\n");
-                for(int i = 0; i < word.length(); i++){
-                    if(letter == word.charAt(i)){
+                for (int i = 0; i < word.length(); i++) {
+                    if (letter == word.charAt(i)) {
                         wordState.set(i, letter);
                     }
                 }
-            }else{
+                if(!wordState.contains('_')){
+                    IO.println(getHangmanArt(wrongGuesses));
+                    IO.println("YOU WIN");
+                    IO.println("The word was: " + word);
+                    break;
+                }
+            }
+            else {
                 IO.println("Wrong guess!\n");
                 wrongGuesses++;
             }
         }
+
+        if(wrongGuesses >= 6){
+            IO.println(getHangmanArt(wrongGuesses));
+            IO.println("GAME OVER!");
+            IO.println("The word was: " + word);
+        }
+
+
 
         s.close();
     }
