@@ -12,7 +12,7 @@ public class Hangman {
     }
 
     static void hangman(){
-        String word = "pizza";
+        String word = getWord();
 
         Scanner s = new Scanner(System.in);
         ArrayList<Character> wordState = new ArrayList<>();
