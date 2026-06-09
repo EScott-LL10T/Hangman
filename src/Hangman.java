@@ -1,5 +1,9 @@
-import java.sql.Array;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
@@ -136,5 +140,25 @@ public class Hangman {
         }
         return c;
 
+    }
+
+    public static String getWord(){
+        String filePath = "words.txt";
+        ArrayList<String> words = new ArrayList<>();
+        try(BufferedReader r = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while((line = r.readLine()) != null){
+                words.add(line.trim());
+            }
+        } catch (FileNotFoundException e) {
+            IO.println("file not found");
+            return "";
+        } catch (IOException e) {
+            IO.println("Something went wrong");
+            return "";
+        }
+
+        Random r = new Random();
+        return words.get(r.nextInt(words.size()));
     }
 }
